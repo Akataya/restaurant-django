@@ -1,0 +1,5 @@
+Contact
+Reservation 
+Comments - https://django-contrib-comments.readthedocs.io/en/latest/example.html
+Article list pagination
+Add instagram
