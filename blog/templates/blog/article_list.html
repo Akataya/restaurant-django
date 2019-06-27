@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load comments %}
+
 
 {% block content %}
     <section class="home-slider owl-carousel">
@@ -8,21 +10,21 @@
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center">
             <div class="col-md-10 col-sm-12 ftco-animate text-center">
-              <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p>
+              <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'home' %}">Home</a></span> <span>Blog</span></p>
               <h1 class="mb-3">Blog</h1>
             </div>
           </div>
         </div>
       </div>
     </section>
-    
+
     <section class="ftco-section bg-light">
       <div class="container">
         <div class="row">
             {% for article in object_list %}
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="blog-entry">
-                      <a href="blog-single.html" class="block-20" style="background-image: url({{article.image.url}});">
+                      <a href="{% url 'blog:article-detail' article.id %}" class="block-20" style="background-image: url({{article.image.url}});">
                       </a>
                       <div class="text p-4">
                         <div class="meta">
@@ -32,7 +34,8 @@
                         <h3 class="heading"><a href="{% url 'blog:article-detail' article.id %}">{{article.title}}</a></h3>
                         <p class="clearfix">
                           <a href="{% url 'blog:article-detail' article.id %}" class="float-left read">Read more</a>
-                          <a href="#" class="float-right meta-chat"><span class="icon-chat"></span> X</a>
+                          {% get_comment_count for article as comment_count %}
+                          <a class="float-right meta-chat"><span class="icon-chat"></span> {{comment_count}}</a>
                         </p>
                       </div>
                     </div>
@@ -57,6 +60,5 @@
         </div>
       </div>
     </section>
-
   {% endblock %}
   

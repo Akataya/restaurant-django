@@ -1,0 +1,85 @@
+{% load custom_tags %}
+{% load crispy_forms_tags %}
+
+<footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Tasty</h2>
+              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+                  {% get_social_media as social_media_links %}
+                  {% for item in social_media_links %}
+                    <li class="ftco-animate"><a href="{{item.link}}" target="_blank"><span class="icon-{{item.name}}"></span></a></li>
+                  {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+             <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Opening Hours</h2>
+              <ul class="list-unstyled">
+                  {% get_schedule as schedule_items %}
+                  {% for item in schedule_items %}
+                    {% if item.closed %}
+                    <li><a class="py-2 d-block">{{item.day}}: <span>Closed</span></a></li>
+                    {% else %}
+                     <li><a class="py-2 d-block">{{item.day}}: <span>{{item.open_time}} - {{item.close_time|time}}</span></a></li>
+                    {% endif %}
+                  {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+             <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Contact Information</h2>
+              <ul class="list-unstyled">
+                  {% get_contact_details as contacts %}
+                <li><a href="#" class="py-2 d-block">{{contacts.address}}</a></li>
+                <li><a href="#" class="py-2 d-block">{{contacts.phone}}</a></li>
+                <li><a href="#" class="py-2 d-block">{{contacts.website}}</a></li>
+                <li><a href="#" class="py-2 d-block">{{contacts.email}}</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Newsletter</h2>
+              <p>Far far away, behind the word mountains, far from the countries.</p>
+                {% get_subscriber_form as form %}
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                  <form action="#" class="subscribe-form" method="POST">
+                    <div class="form-group">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <span class="icon icon-paper-plane"></span>
+                        <input type="submit" style="display:none;">
+                    </div>
+                  </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>

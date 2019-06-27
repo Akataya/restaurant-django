@@ -2,10 +2,29 @@ from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 from .models import Article, Category
 from taggit.models import Tag
+from django.db.models import Q
 
 
 class ArticleList(ListView):
     model = Article
+    term = ''
+
+    # def get(self, request, *args, **kwargs):
+    #     self.term = request.GET.get('term')
+    #     return super(ArticleList, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(ArticleList, self).get_context_data(**kwargs)
+        term = self.request.GET.get('term')
+        if term:
+            context['object_list'] = Article.objects.filter(
+                Q(title__icontains=term) |
+                Q(content__icontains=term) |
+                Q(tags__name__icontains=term)
+            ).distinct()
+        return context
+
+    # Include an alternative function-based list view
 
 
 class ArticleDetail(DetailView):

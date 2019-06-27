@@ -1,0 +1,33 @@
+{% extends "django_comments_xtd/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+    <section class="home-slider owl-carousel">
+      <div class="slider-item" style="background-image: url({% static 'images/bg_1.jpg' %});" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text align-items-center justify-content-center">
+            <div class="col-md-10 col-sm-12 ftco-animate text-center">
+              <h1 class="mb-3">{% trans "Comment confirmation requested" %}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section">
+        <div class="row justify-content-center flex-fill">
+            <div class="col-md-7">
+                <p class="lead text-center">
+                    {% blocktrans %}A confirmation message has been sent to your
+                    email address. Please, click on the link in the message to confirm
+                    your comment.{% endblocktrans %}
+                </p>
+                <p class="pt-5 text-center">
+                    Go back to: <a href="{{ target.get_absolute_url }}">{{ target }}</a>
+                </p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

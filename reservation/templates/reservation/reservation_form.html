@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% load staticfiles %}
+{% load bootstrap4 %}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+
+{% block extrahead %}       {# Extra Resources Start #}
+{{ form.media }}            {# Form required JS and CSS #}
+{% endblock %}
+
+{% block content %}
+    <section class="home-slider owl-carousel">
+      <div class="slider-item" style="background-image: url({% static 'images/bg_1.jpg' %});" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text align-items-center justify-content-center">
+            <div class="col-md-10 col-sm-12 ftco-animate text-center">
+              <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'home' %}">Home</a></span> <span>Reservation</span></p>
+              <h1 class="mb-3">Make a Reservation</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row no-gutters justify-content-center mb-5 pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2>Make a Reservation</h2>
+          </div>
+        </div>
+        <div class="row d-flex">
+          <div class="col-md-4 ftco-animate img" style="background-image: url({% static 'images/bg_1.jpg' %});"></div>
+          <div class="col-md-8 ftco-animate makereservation p-5 bg-light">
+              <form method="POST">
+                {% csrf_token %}
+                <div class="row">
+                  {% bootstrap_form form %}
+                  <div class="col-md-12 mt-3 pl-0">
+                    <div class="form-group">
+                      <input type="submit" value="Make a Reservation" class="btn btn-primary py-3 px-5">
+                    </div>
+                  </div>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="{% static 'js/reservation.js' %}"></script>
+{% endblock %}

@@ -3,6 +3,7 @@ from taggit.managers import TaggableManager
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from django_comments.moderation import CommentModerator, moderator
 
 
 class Author(models.Model):
@@ -18,7 +19,7 @@ class Article(models.Model):
     title = models.CharField(max_length=100)
     # content = RichTextField()
     content = RichTextUploadingField()
-    image = models.ImageField(upload_to='articles/', null=True, blank=True)
+    image = models.ImageField(upload_to='articles/', default="default_article.jpg")
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -36,3 +37,11 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+# Comments moderation from django_comments
+class ArticleModerator(CommentModerator):
+    email_notification = True
+
+
+moderator.register(Article, ArticleModerator)

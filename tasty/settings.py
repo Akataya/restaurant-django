@@ -25,14 +25,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'taggit',
     'ckeditor',
     'ckeditor_uploader',
+    'crispy_forms',
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
+    'django_comments_xtd',
+    'django_comments',
 
     'menu',
     'about',
     'blog',
+    'contact',
+    'reservation'
 ]
 
 MIDDLEWARE = [
@@ -125,3 +133,24 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'testing@example.com'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+EMAIL_PORT = 1025
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
+
+SITE_ID = 1
+
+# Django Comments Xtd
+COMMENTS_APP = 'django_comments_xtd'
+COMMENTS_XTD_MAX_THREAD_LEVEL = 2
+COMMENTS_XTD_CONFIRM_EMAIL = True
+COMMENTS_XTD_FORM_CLASS = "blog.forms.CustomCommentForm"

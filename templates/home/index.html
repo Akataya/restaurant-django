@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+
+{% load staticfiles %}
+{% load bootstrap4 %}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+
+{% block extrahead %}       {# Extra Resources Start #}
+{{ form.media }}            {# Form required JS and CSS #}
+{% endblock %}
+
 
 {% block content %}
     <section class="home-slider owl-carousel">
@@ -9,74 +20,51 @@
           <div class="row slider-text align-items-center justify-content-center text-center">
             <div class="col-md-10 col-sm-12 ftco-animate">
               <h1 class="mb-3">Book a table for yourself at a time convenient for you</h1>
-              <p><a href="reservation.html" class="btn btn-primary btn-outline-white px-5 py-3">Book a table</a></p>
+              <p><a href="{% url 'reservation:reserve-table' %}" class="btn btn-primary btn-outline-white px-5 py-3">Book a table</a></p>
             </div>
           </div>
         </div>
       </div>
-
       <div class="slider-item" style="background-image: url({% static 'images/bg_2.jpg' %});">
         <div class="overlay"></div>
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center text-center">
             <div class="col-md-10 col-sm-12 ftco-animate">
               <h1 class="mb-3">Tasty &amp; Delicious Food</h1>
-              <p><a href="reservation.html" class="btn btn-primary btn-outline-white px-5 py-3">Book a table</a></p>
+              <p><a href="{% url 'reservation:reserve-table' %}" class="btn btn-primary btn-outline-white px-5 py-3">Book a table</a></p>
             </div>
           </div>
         </div>
       </div>
-
       <div class="slider-item" style="background-image: url({% static 'images/bg_3.jpg' %});">
         <div class="overlay"></div>
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center text-center">
             <div class="col-md-10 col-sm-12 ftco-animate">
               <h1 class="mb-3">Book a table for yourself at a time convenient for you</h1>
-              <p><a href="reservation.html" class="btn btn-primary btn-outline-white px-5 py-3">Book a table</a></p>
+              <p><a href="{% url 'reservation:reserve-table' %}" class="btn btn-primary btn-outline-white px-5 py-3">Book a table</a></p>
             </div>
           </div>
         </div>
       </div>
     </section>
-
     <div class="ftco-section-reservation">
       <div class="container">
         <div class="row">
           <div class="col-md-12 reservation pt-5 px-5">
             <div class="block-17">
-              <form action="" method="post" class="d-block d-lg-flex">
+              <form class="d-block d-lg-flex" method="POST">
+                {% csrf_token %}
                 <div class="fields d-block d-lg-flex">
-
-                  <div class="textfield-name one-third"><input type="text" class="form-control" placeholder="Name"></div>
-
-                  <div class="textfield-phone one-third"><input type="text" class="form-control" placeholder="Phone"></div>
-
-                  <div class="book-date one-third"><input type="text" id="book_date" class="form-control" placeholder="M/D/YYYY"></div>
-
-                  <div class="book-time one-third">
-                    <input type="text" id="book_time" class="form-control" placeholder="Time">
-                  </div>
-
-                  <div class="select-wrap one-third">
-                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                    <select name="" id="" class="form-control">
-                      <option value="">Person</option>
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4+</option>
-                    </select>
-                  </div>
+                  {{form|crispy}}
                 </div>
-                <input type="submit" class="search-submit btn btn-primary" value="Book a table">  
+                <input id="submit-button" type="submit" class="search-submit btn btn-primary form-control col-lg-2 ml-0" value="Book a table">
               </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-
     <section class="ftco-section-2">
       <div class="container d-flex">
         <div class="section-2-blocks-wrapper row">
@@ -92,7 +80,6 @@
         </div>
       </div>
     </section>
-
     <section class="ftco-section bg-light">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
@@ -144,7 +131,6 @@
         </div>
       </div>
     </section>
-
     <section class="ftco-section parallax-img" style="background-image: url({% static 'images/bg_3.jpg' %});" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
@@ -155,7 +141,6 @@
         </div>
       </div>
     </section>
-
     <section class="ftco-section bg-light">
       <div class="container special-dish">
         <div class="row d-flex no-gutters">
@@ -174,7 +159,6 @@
         </div>
       </div>
     </section>
-
     <section class="ftco-section testimony-section">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
@@ -203,7 +187,6 @@
         </div>
       </div>
     </section>
-
     <section class="ftco-section bg-light">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
@@ -236,4 +219,10 @@
         </div>
       </div>
     </section>
+    <script>
+    (function($) {
+        $(".input-group-text" ).css({"background-color":"transparent", "border-color": "black"});
+      })(jQuery);
+    </script>
+
 {% endblock %}
