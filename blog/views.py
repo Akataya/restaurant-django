@@ -8,6 +8,7 @@ from django.db.models import Q
 class ArticleList(ListView):
     model = Article
     term = ''
+    paginate_by = 4
 
     # def get(self, request, *args, **kwargs):
     #     self.term = request.GET.get('term')

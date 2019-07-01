@@ -10,7 +10,6 @@ class ContactForm(forms.Form):
     subject = forms.CharField(required=True, label="Message subject")
     message = forms.CharField(widget=forms.Textarea, required=True, label="Your message", min_length=50)
 
-    # Alternative to Bootstrap 4 form:
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()

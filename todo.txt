@@ -1,6 +1,0 @@
-Comments - https://django-contrib-comments.readthedocs.io/en/latest/example.html
-Article list pagination
-Add Instagram
-Fix speciality dishes images/blocks
-Gihub
-Herok

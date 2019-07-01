@@ -17,7 +17,6 @@ class Author(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=100)
-    # content = RichTextField()
     content = RichTextUploadingField()
     image = models.ImageField(upload_to='articles/', default="default_article.jpg")
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)

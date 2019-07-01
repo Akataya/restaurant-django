@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_comments_xtd',
     'django_comments',
+    'sorl.thumbnail',
+    'django_instagram',
 
     'menu',
     'about',
